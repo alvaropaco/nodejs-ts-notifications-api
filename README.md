@@ -1,4 +1,5 @@
-# Node.js TypeScript Notifications API
+# Node.js TypeScript Notifications API [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=alvaropaco_nodejs-ts-notifications-api&metric=bugs)](https://sonarcloud.io/summary/new_code?id=alvaropaco_nodejs-ts-notifications-api) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=alvaropaco_nodejs-ts-notifications-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=alvaropaco_nodejs-ts-notifications-api) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alvaropaco_nodejs-ts-notifications-api&metric=coverage)](https://sonarcloud.io/summary/new_code?id=alvaropaco_nodejs-ts-notifications-api) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=alvaropaco_nodejs-ts-notifications-api&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=alvaropaco_nodejs-ts-notifications-api)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=alvaropaco_nodejs-ts-notifications-api)](https://sonarcloud.io/summary/new_code?id=alvaropaco_nodejs-ts-notifications-api)
 
 This project is a Notification API built with Node.js and TypeScript. It allows for the sending of notifications via different channels (e.g., SMS, WhatsApp) and provides an interface for receiving status updates via webhooks.
 
