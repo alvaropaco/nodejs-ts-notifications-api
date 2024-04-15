@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
   ...dbConfig
 });
 
-sequelize.sync({ force: env === 'development' })  // Use force sync only in development
+sequelize.sync({ force: env === 'development' })
   .then(() => console.log('Database & tables created!'));
 
 export default sequelize;

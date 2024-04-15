@@ -1,6 +1,5 @@
-// models/notification.model.ts
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '.'; // Adjust the import based on your setup
+import sequelize from '.';
 import { Channel, Notification } from '../dtos/notification.dto';
 
 class NotificationModel extends Model<Notification> implements Notification {

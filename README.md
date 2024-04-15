@@ -1,77 +1,77 @@
-```ts
-enum Channel {
-  sms = 'sms',
-  whatsApp = 'whatsApp',
-}
+# Node.js TypeScript Notifications API
 
-interface Notification {
-  // id da notificação no disparador
-  id: string;
+This project is a Notification API built with Node.js and TypeScript. It allows for the sending of notifications via different channels (e.g., SMS, WhatsApp) and provides an interface for receiving status updates via webhooks.
 
-  // canal da notificação
-  channel: Channel;
+## Prerequisites
 
-  // id do destinatário ex: +5511999999999
-  to: string;
+Before you begin, ensure you have met the following requirements:
 
-  // conteúdo da notificação
-  body: string;
+- Node.js (v18.x or higher)
+- npm (v6.x or higher) or yarn (v1.22.x or higher)
+- Bun (v1.x or higher)
 
-  // id definido pelos sistemas externos ao serviço de notificações
-  externalId: string
+## Getting Started
 
-  // other fields: recipients, timestamps, etc
-}
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-export class NotificationSdk {
-  // checks if a notification with the given externalId exists
-  exists(externalId: string): Promise<boolean> {
-    // mocked value, could return false
-    return true;
-  }
-  
-  // sends a notification
-  send(channel: Channel, to: string, body: string, externalId: string): Promise<Notification> {
-    // mocked charge
-    const id = (Math.random() + 1).toString(36).substring(7);
-    return { id, channel, to, body, externalId };
-  }
-}
+### Installation
+
+1. **Clone the repository:**
+
+```bash
+  git clone https://github.com/yourusername/nodejs-ts-notifications-api.git
+  cd nodejs-ts-notifications-api
 ```
 
-Um serviço externo de disparo de notificações por SMS e WhatsApp fornece um método para disparo de notificações, mas não permite a consulta de notificações por API. Eles enviam as atualizações do status das notificações através de webhooks e, caso não consigam entregar o webhook, retentam a entrega por 1h após o evento. No entanto, disponibilizam um método para verificar se a notificação, dado seu id externo, foi enviada a eles.
+2. **Install the dependencies:**
 
-Como não conseguimos consultar o status das notificações através da API, precisamos processar os webhooks e manter os registros atualizados em nosso banco de dados. 
-
-As notificações de sms podem assumir os status processing, rejected, sent e delivered com as seguintes transições teóricas:
- - processing -> rejected
- - processing -> sent
- - sent -> delivered
-
-As notificações de WhatsApp podem assumir os status processing, rejected, sent, delivered e viewed com as seguintes transições teóricas:
- - processing -> rejected
- - processing -> sent
- - sent -> delivered
- - delivered -> viewed
-
-Os webhooks possuem o seguinte formato:
-```json
-{
-  "timestamp": "YYYY-MM-DDThh:mm:ss.SSSZ",
-  "event": "delivered" // or sent, etc
-}
+```bash
+  npm install
 ```
 
-Em breve o sistema de notificações suportará novos canais com novos status e transições diferentes para cada canal.
+3. **Set up environment variables:**
+Configure your db connection in `./config/config.json` file.
 
-Crie uma aplicação servida via Web API utilizando NodeJS/TypeScript que permita o envio, atualização e consulta dos status das notificações e disponibilize através de um repositório do GitHub. A escolha do banco de dados não é relevante para esse projeto, considere utilizar o SQLite por simplicidade.
+4. **Run the migrations:**
 
-1. Caso o nossa aplicação fique indisponível por muito tempo, podemos perder eventos de mudança de status. Quais medidas você tomaria para deixar a aplicação mais robusta?
+```bash
+  npx sequelize-cli db:migrate
+```
 
-2. Precisamos enviar os eventos de mudança de status das notificações para um stream de eventos (e.g. Apache Kafka, Amazon Kinesis Data Streams, etc) para que outras aplicações possam consumí-los. Precisamos garantir que cada evento seja entregado pelo menos uma vez no stream. Como você faria esse processo?
+## Running the Application
+To run the application in development mode, use the following command:
 
-3. Os eventos de mudança de estado podem vir fora de ordem caso o serviço externo de notificações demore para processar algumas notificações ou tenha alguma degradação de performance. Quais medidas você tomou ou tomaria para deixar a aplicação mais robusta a esse cenário?
+```bash
+yarn start
+```
+For production, first build the project and then start it:
 
-## Entrega do Desafio ##
-- Disponibilize o código em um repositório no GitHub.
-- Inclua instruções detalhadas sobre como rodar o projeto.
+```bash
+yarn build
+yarn serve
+```
+
+## Testing
+To run the automated tests for this system:
+
+```bash
+yarn test
+```
+
+## Using the API
+Once the application is running, you can access the API locally:
+
+- Base URL: http://localhost:3000
+
+### Accessing Swagger API Documentation
+Swagger URL: http://localhost:3000/api-docs
+Navigate to this URL in your web browser to view the Swagger UI, which provides detailed documentation of all the API endpoints, models, and allows you to execute API requests directly from the interface.
+
+## Key Endpoints
+POST /notifications - Send a notification.
+GET /notifications/{id} - Retrieve a notification by ID.
+POST /webhooks - Endpoint for external services to send updates.
+Each endpoint allows for various operations which are detailed in the Swagger documentation, where you can also try out the API in real-time.
+
+## Contact
+Alvaro Paçó – @alvaropaco – alvaropaconeto@gmail.com

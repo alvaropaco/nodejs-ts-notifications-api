@@ -93,7 +93,7 @@ router.get('/:id', getNotification);
 
 /**
  * @swagger
- * /webhooks:
+ * /notifications/webhooks:
  *   post:
  *     summary: Receive a webhook for a notification status update
  *     description: Endpoint for external systems to send status updates for notifications.

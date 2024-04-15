@@ -3,13 +3,30 @@ export enum Channel {
   WhatsApp = 'whatsApp',
 }
 
+export enum STATUS {
+  sent = 'sent',
+  delivered = 'delivered',
+  processing = 'processing',
+}
+
 export interface Notification {
-  id?: string;                // Unique identifier for the notification
-  channel: Channel;          // Channel through which the notification was sent
-  to: string;                // Recipient of the notification
-  body: string;              // Content of the notification
-  externalId: string;        // ID from an external system
-  status: string;            // Current status of the notification (e.g., 'sent', 'delivered')
-  createdAt?: Date;          // Optional: Date when the notification was created
-  updatedAt?: Date;          // Optional: Date when the notification was last updated
+  id?: string;
+  channel: Channel;
+  to: string;
+  body: string;
+  externalId: string;
+  status: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface NotificationUpdate {
+  status: string;
+}
+
+export interface NotificationInput {
+  channel: Channel;
+  to: string;
+  body: string;
+  externalId: string;
 }
